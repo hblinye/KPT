@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./KePT/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - /rails/KPT/KePT:/usr/src/app
+    command: /bin/bash
+    tty: true
+    restart: always
+
+  api:
+    build:
+      context: .
+      dockerfile: ./KePT-API/Dockerfile
+    ports: 
+      - 8081:8000
+    volumes:
+      - /rails/KPT/KePT-API:/usr/src/app
+      - /rails/KPT/KePT/db:/usr/src/app/rails-db
+    command: /bin/bash
+    tty: true
+    restart: always
